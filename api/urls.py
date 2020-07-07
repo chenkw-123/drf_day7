@@ -10,4 +10,5 @@ urlpatterns = [
     url(r"login_user/", obtain_jwt_token),  # 源码中定义了obtain_jwt_token=ObtainJSONWebToken.as_view()
     path("user/", views.UserAPIView.as_view()),
     path("check/", views.LoginAPIView.as_view()),
+    path("cars/", views.CarListAPIView.as_view()),
 ]

@@ -1,10 +1,11 @@
 import re
 
 from rest_framework import serializers
+from rest_framework.generics import ListAPIView
 from rest_framework.serializers import ModelSerializer
 from rest_framework_jwt.settings import api_settings
 
-from api.models import User
+from api.models import User, Car
 
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
@@ -44,7 +45,7 @@ class UserModelSerializer(ModelSerializer):
     def validate(self, attrs):
         user = attrs.get("user")
         password = attrs.get("password")
-        print(user,password)
+        print(user, password)
         # 对于各种登录方式做处理  账号  邮箱  手机号
         if re.match(r'.+@.+', user):
             user_obj = User.objects.filter(email=user).first()
@@ -63,3 +64,11 @@ class UserModelSerializer(ModelSerializer):
             self.obj = user_obj
 
         return attrs
+
+
+class CarModelSerializer(ModelSerializer):
+    class Meta:
+        model = Car
+        # 最好采用自己指定的字段，因为可以添加自定义序列化或者反序列化字段
+
+        fields = ("name", "price", "brand")

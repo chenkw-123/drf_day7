@@ -121,6 +121,8 @@ USE_TZ = True
 
 REST_FRAMEWORK = {
     'EXCEPTION_HANDLER': 'utils.exceptions.exception_handler',
+    #搜索配置
+    # 'DEFAULT_FILTER_BACKENDS': "rest_framework.filters.SearchFilter",
 }
 
 
